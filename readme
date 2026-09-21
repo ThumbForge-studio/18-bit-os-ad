@@ -1,0 +1,478 @@
+# 🦅 Falcon OS
+
+Developer : Aarav
+
+Current Version : 1.04
+
+Architecture : x86
+
+Language : NASM Assembly
+
+Current Mode : 16-bit Real Mode
+
+------------------------------------------------------------
+
+# Project Goal
+
+Learn Operating System Development
+from scratch.
+
+Every version must teach
+one new concept.
+
+No blind copy-paste.
+
+Understand everything.
+
+------------------------------------------------------------
+
+# Boot Process
+
+Power Button
+        │
+        ▼
+CPU Reset
+        │
+        ▼
+BIOS Starts
+        │
+        ▼
+BIOS checks boot device
+        │
+        ▼
+Reads first 512 bytes
+from disk
+        │
+        ▼
+Copies bootloader to
+
+0x7C00
+
+        │
+        ▼
+CPU executes our code
+
+boot.asm
+
+------------------------------------------------------------
+
+# Memory
+
+BIOS loads us at
+
+0x7C00
+
+Therefore
+
+[org 0x7C00]
+
+is required.
+
+------------------------------------------------------------
+
+# CPU Mode
+
+Current
+
+16-bit Real Mode
+
+Features
+
+✔ BIOS Interrupts
+
+✔ Direct Hardware Access
+
+✔ Simple Memory
+
+Limitations
+
+❌ No Multitasking
+
+❌ No Memory Protection
+
+❌ No 32-bit Programs
+
+❌ No GUI
+
+------------------------------------------------------------
+
+# Why 16-bit?
+
+Because BIOS always starts
+the CPU in Real Mode.
+
+Every OS starts here.
+
+Windows
+
+Linux
+
+FreeBSD
+
+All begin in 16-bit mode.
+
+------------------------------------------------------------
+
+# Registers Learned
+
+AX
+
+General Register
+
+AH
+
+High 8 bits of AX
+
+AL
+
+Low 8 bits of AX
+
+SI
+
+Source Index
+
+Used while printing strings.
+
+SP
+
+Stack Pointer
+
+BP
+
+Base Pointer
+
+IP
+
+Instruction Pointer
+
+------------------------------------------------------------
+
+# Instructions Learned
+
+mov
+
+Copy data
+
+Example
+
+mov ax,3
+
+----------------------
+
+cmp
+
+Compare values
+
+Example
+
+cmp al,0
+
+----------------------
+
+je
+
+Jump if Equal
+
+----------------------
+
+jmp
+
+Unconditional Jump
+
+----------------------
+
+lodsb
+
+Load byte
+
+AL = [SI]
+
+SI++
+
+----------------------
+
+int
+
+Call BIOS
+
+Example
+
+int 10h
+
+Video
+
+int 16h
+
+Keyboard
+
+----------------------
+
+cli
+
+Disable interrupts
+
+----------------------
+
+hlt
+
+Stop CPU
+
+------------------------------------------------------------
+
+# BIOS Interrupts
+
+INT 10h
+
+Video Services
+
+Functions Used
+
+AH = 0Eh
+
+Print Character
+
+AH = 00h
+
+Video Mode
+
+------------------------------------------------------------
+
+INT 16h
+
+Keyboard Services
+
+AH = 00h
+
+Wait for Key
+
+Returns
+
+AL
+
+ASCII Character
+
+AH
+
+Scan Code
+
+------------------------------------------------------------
+
+# Keyboard Working
+
+User presses key
+
+↓
+
+Keyboard Controller
+
+↓
+
+BIOS
+
+↓
+
+INT 16h
+
+↓
+
+AL contains ASCII
+
+↓
+
+INT 10h prints character
+
+↓
+
+Character appears on screen
+
+------------------------------------------------------------
+
+# Printing Strings
+
+mov si,message
+
+↓
+
+lodsb
+
+↓
+
+AL gets character
+
+↓
+
+cmp al,0
+
+↓
+
+If zero
+
+Stop
+
+Else
+
+↓
+
+INT 10h
+
+↓
+
+Print Character
+
+↓
+
+Repeat
+
+------------------------------------------------------------
+
+# Boot Signature
+
+dw 0xAA55
+
+Required.
+
+Without it
+
+BIOS says
+
+Not Bootable Device
+
+------------------------------------------------------------
+
+# Current Features
+
+✔ Boot
+
+✔ Falcon Logo
+
+✔ Banner
+
+✔ Screen Output
+
+✔ Keyboard Input
+
+✔ Prompt
+
+------------------------------------------------------------
+
+# Current Folder
+
+boot.asm
+
+Original Version
+
+boot_v104.asm
+
+Development Version
+
+Makefile
+
+Build System
+
+run.bat
+
+Quick Run
+
+README.md
+
+Documentation
+
+------------------------------------------------------------
+
+# Build
+
+make
+
+Run
+
+make run
+
+------------------------------------------------------------
+
+# Roadmap
+
+v1.00
+
+Boot
+
+--------------------
+
+v1.01
+
+Better UI
+
+--------------------
+
+v1.02
+
+Falcon Logo
+
+--------------------
+
+v1.03
+
+Keyboard
+
+--------------------
+
+v1.04
+
+Mini Terminal
+
+--------------------
+
+v2.00
+
+32-bit Protected Mode
+
+--------------------
+
+v3.00
+
+C Kernel
+
+--------------------
+
+v4.00
+
+Graphics
+
+--------------------
+
+v5.00
+
+Desktop
+
+------------------------------------------------------------
+
+# Learning Rule
+
+Read
+
+↓
+
+Understand
+
+↓
+
+Modify
+
+↓
+
+Experiment
+
+↓
+
+Build
+
+Never only copy-paste.
+
+------------------------------------------------------------
+
+Project
+
+Falcon OS
+
+Made by Aarav
+
+🦅
