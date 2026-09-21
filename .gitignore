@@ -1,0 +1,15 @@
+# Compiled binaries and images
+*.bin
+*.img
+*.iso
+*.obj
+*.o
+*.sys
+*.out
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# VS Code specific files
+.vscode/
